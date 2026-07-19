@@ -306,6 +306,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            display: block;
         }
 
         .avatar-circle:hover {
@@ -465,12 +466,12 @@
             'Wind', 'Apex', 'Beast', 'Champion', 'Dynamo', 'Eclipse', 'Fury', 'Glacier'
         ];
 
-        // Avatar warna random yang cantik
-        const avatarColors = [
-            '#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8',
-            '#F7DC6F', '#BB8FCE', '#85C1E2', '#F8B88B', '#A9DFBF',
-            '#F1948A', '#AED6F1', '#D5A6BD', '#F39C12', '#9B59B6',
-            '#3498DB', '#E74C3C', '#1ABC9C', '#27AE60', '#E67E22'
+        // Popular Roblox User IDs with avatars
+        const robloxUserIds = [
+            1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
+            16, 17, 18, 19, 20, 155, 253, 382, 500, 735, 1000,
+            1234, 5678, 9999, 12345, 54321, 99999, 123456, 555555,
+            777777, 888888, 111111, 222222, 333333, 444444, 666666
         ];
 
         let servers = [];
@@ -497,22 +498,18 @@
             return name + number;
         }
 
-        function getRandomColor() {
-            return avatarColors[Math.floor(Math.random() * avatarColors.length)];
-        }
-
-        function getInitials(name) {
-            return name.substring(0, 2).toUpperCase();
+        function getRandomRobloxUserId() {
+            return robloxUserIds[Math.floor(Math.random() * robloxUserIds.length)];
         }
 
         function generateRandomPlayers(count) {
             const players = [];
             for (let i = 0; i < count; i++) {
-                const name = getRandomPlayerName();
+                const userId = getRandomRobloxUserId();
                 players.push({
-                    name: name,
-                    color: getRandomColor(),
-                    initials: getInitials(name)
+                    name: getRandomPlayerName(),
+                    userId: userId,
+                    avatarUrl: `https://www.roblox.com/headshot-thumbnail/image?userId=${userId}&width=150&height=150&format=webp`
                 });
             }
             return players;
@@ -559,8 +556,8 @@
                 server.players.forEach(player => {
                     playersHTML += `
                         <div class="player-avatar">
-                            <div class="avatar-circle" style="background: ${player.color};" title="${player.name}">
-                                ${player.initials}
+                            <div class="avatar-circle" title="${player.name}">
+                                <img src="${player.avatarUrl}" alt="${player.name}" loading="lazy">
                             </div>
                             <div class="player-name">${player.name}</div>
                         </div>
