@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Condo Games Hub - Sword Game</title>
+    <title>Condo Games Hub</title>
     <style>
         * {
             margin: 0;
@@ -49,6 +49,10 @@
             justify-content: center;
             flex-wrap: wrap;
             margin-bottom: 50px;
+        }
+
+        .game-selection.hidden {
+            display: none;
         }
 
         .game-card {
@@ -184,50 +188,48 @@
 
         .players-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
-            gap: 10px;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
             margin-bottom: 20px;
             min-height: 140px;
         }
 
         .player-avatar {
-            width: 100%;
-            aspect-ratio: 1;
-            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .avatar-circle {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
             background: linear-gradient(135deg, #667eea, #764ba2);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5em;
             cursor: pointer;
             transition: all 0.2s ease;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
             color: white;
             font-weight: bold;
-            border: 2px solid white;
+            font-size: 1.2em;
+            border: 3px solid white;
         }
 
-        .player-avatar:hover {
-            transform: scale(1.05);
+        .avatar-circle:hover {
+            transform: scale(1.1);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
 
-        .player-avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
         .player-name {
-            font-size: 0.7em;
-            margin-top: 4px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            text-align: center;
+            font-size: 0.75em;
             color: #333;
             font-weight: 600;
+            text-align: center;
+            word-break: break-word;
+            max-width: 60px;
         }
 
         .server-button {
@@ -309,17 +311,32 @@
                 width: 100%;
                 max-width: 280px;
             }
+
+            .players-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🎮 Condo Games Hub</h1>
+            <p id="headerSubtitle">Pilih Game untuk Dimainkan</p>
+        </div>
+
         <!-- Game Selection Screen -->
         <div id="gameSelection" class="game-selection">
+            <div class="game-card" onclick="selectGame('condogame')">
+                <div class="game-icon">🏠</div>
+                <h2>Condo Game</h2>
+                <p>Bermain di kondominial dengan teman</p>
+            </div>
             <div class="game-card" onclick="selectGame('swordgame')">
                 <div class="game-icon">⚔️</div>
                 <h2>Sword Game</h2>
-                <p>Tap untuk masuk ke battle</p>
+                <p>Pertarungan sengit dengan pedang</p>
             </div>
         </div>
 
@@ -328,7 +345,7 @@
             <div class="back-button">
                 <button class="back-btn" onclick="goBack()">← Kembali</button>
             </div>
-            <div class="servers-title">Sword Game - Pilih Server</div>
+            <div class="servers-title" id="gameTitle">Condo Game - Pilih Server</div>
             <div class="servers-grid" id="serversGrid"></div>
             <div style="text-align: center;">
                 <button class="refresh-button" onclick="generateServers()">🔄 Refresh Server</button>
@@ -344,26 +361,40 @@
         const avatarColors = [
             '#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8',
             '#F7DC6F', '#BB8FCE', '#85C1E2', '#F8B88B', '#A9DFBF',
-            '#F1948A', '#AED6F1', '#F8B88B', '#D5A6BD', '#85C1E2'
+            '#F1948A', '#AED6F1', '#F8B88B', '#D5A6BD', '#85C1E2',
+            '#F39C12', '#9B59B6', '#3498DB', '#E74C3C', '#1ABC9C'
         ];
 
         const playerNames = [
             'Player', 'Gamer', 'Hero', 'Legend', 'Master', 'Pro', 'Elite', 'Shadow',
             'Phoenix', 'Dragon', 'Warrior', 'Knight', 'Ranger', 'Wizard', 'Ninja', 'Viking',
-            'Storm', 'Blaze', 'Frost', 'Sonic', 'Ghost', 'Titan', 'Arrow', 'Mystic'
+            'Storm', 'Blaze', 'Frost', 'Sonic', 'Ghost', 'Titan', 'Arrow', 'Mystic',
+            'Hunter', 'Slayer', 'Demon', 'Angel', 'Fire', 'Ice', 'Thunder', 'Wind'
         ];
 
         let servers = [];
+        let currentGame = '';
 
         function selectGame(game) {
-            document.getElementById('gameSelection').style.display = 'none';
+            currentGame = game;
+            document.getElementById('gameSelection').classList.add('hidden');
             document.getElementById('serversScreen').classList.add('active');
+            
+            if (game === 'condogame') {
+                document.getElementById('gameTitle').textContent = 'Condo Game - Pilih Server';
+                document.getElementById('headerSubtitle').textContent = 'Condo Game';
+            } else {
+                document.getElementById('gameTitle').textContent = 'Sword Game - Pilih Server';
+                document.getElementById('headerSubtitle').textContent = 'Sword Game';
+            }
+            
             generateServers();
         }
 
         function goBack() {
-            document.getElementById('gameSelection').style.display = 'flex';
+            document.getElementById('gameSelection').classList.remove('hidden');
             document.getElementById('serversScreen').classList.remove('active');
+            document.getElementById('headerSubtitle').textContent = 'Pilih Game untuk Dimainkan';
             servers = [];
         }
 
@@ -429,8 +460,8 @@
                 let playersHTML = '';
                 server.players.forEach(player => {
                     playersHTML += `
-                        <div style="text-align: center;">
-                            <div class="player-avatar" style="background: ${player.color}; margin-bottom: 4px;" title="${player.name}">
+                        <div class="player-avatar">
+                            <div class="avatar-circle" style="background: ${player.color};" title="${player.name}">
                                 ${player.initials}
                             </div>
                             <div class="player-name">${player.name}</div>
