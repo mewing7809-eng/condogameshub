@@ -191,45 +191,42 @@
             grid-template-columns: repeat(5, 1fr);
             gap: 12px;
             margin-bottom: 20px;
-            min-height: 140px;
+            min-height: 200px;
         }
 
         .player-avatar {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
         }
 
-        .avatar-circle {
-            width: 55px;
-            height: 55px;
+        .avatar-image {
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
             cursor: pointer;
             transition: all 0.2s ease;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            color: white;
-            font-weight: bold;
-            font-size: 1.2em;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             border: 3px solid white;
+            object-fit: cover;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: block;
         }
 
-        .avatar-circle:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        .avatar-image:hover {
+            transform: scale(1.15);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
         }
 
         .player-name {
-            font-size: 0.75em;
+            font-size: 0.7em;
             color: #333;
-            font-weight: 600;
+            font-weight: 700;
             text-align: center;
             word-break: break-word;
-            max-width: 60px;
+            max-width: 65px;
+            line-height: 1.2;
         }
 
         .server-button {
@@ -244,6 +241,7 @@
             text-decoration: none;
             display: inline-block;
             text-align: center;
+            margin-top: 10px;
         }
 
         .join-button {
@@ -333,11 +331,6 @@
                 <h2>Condo Game</h2>
                 <p>Bermain di kondominial dengan teman</p>
             </div>
-            <div class="game-card" onclick="selectGame('swordgame')">
-                <div class="game-icon">⚔️</div>
-                <h2>Sword Game</h2>
-                <p>Pertarungan sengit dengan pedang</p>
-            </div>
         </div>
 
         <!-- Servers Screen -->
@@ -345,7 +338,7 @@
             <div class="back-button">
                 <button class="back-btn" onclick="goBack()">← Kembali</button>
             </div>
-            <div class="servers-title" id="gameTitle">Condo Game - Pilih Server</div>
+            <div class="servers-title" id="gameTitle">Sword Game - Pilih Server</div>
             <div class="servers-grid" id="serversGrid"></div>
             <div style="text-align: center;">
                 <button class="refresh-button" onclick="generateServers()">🔄 Refresh Server</button>
@@ -357,19 +350,20 @@
         const MAX_PLAYERS = 50;
         const ROBLOX_JOIN_LINK = "https://www.roblox.et/games/15884350761/UPDATE-Bloody-Ragdoll-Engine-Remastered?privateServerLinkCode=01398199490362022720669062623329";
         
-        // Array warna random untuk avatar
-        const avatarColors = [
-            '#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8',
-            '#F7DC6F', '#BB8FCE', '#85C1E2', '#F8B88B', '#A9DFBF',
-            '#F1948A', '#AED6F1', '#F8B88B', '#D5A6BD', '#85C1E2',
-            '#F39C12', '#9B59B6', '#3498DB', '#E74C3C', '#1ABC9C'
-        ];
-
         const playerNames = [
             'Player', 'Gamer', 'Hero', 'Legend', 'Master', 'Pro', 'Elite', 'Shadow',
             'Phoenix', 'Dragon', 'Warrior', 'Knight', 'Ranger', 'Wizard', 'Ninja', 'Viking',
             'Storm', 'Blaze', 'Frost', 'Sonic', 'Ghost', 'Titan', 'Arrow', 'Mystic',
-            'Hunter', 'Slayer', 'Demon', 'Angel', 'Fire', 'Ice', 'Thunder', 'Wind'
+            'Hunter', 'Slayer', 'Demon', 'Angel', 'Fire', 'Ice', 'Thunder', 'Wind',
+            'Apex', 'Beast', 'Champion', 'Dynamo', 'Eclipse', 'Fury', 'Glacier', 'Havoc'
+        ];
+
+        // Popular Roblox user IDs yang pasti punya avatar
+        const robloxUserIds = [
+            1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+            155, 253, 382, 500, 735, 1000, 1234, 5678,
+            9999, 12345, 54321, 99999, 123456, 555555,
+            777777, 888888, 111111, 222222, 333333, 444444
         ];
 
         let servers = [];
@@ -379,15 +373,7 @@
             currentGame = game;
             document.getElementById('gameSelection').classList.add('hidden');
             document.getElementById('serversScreen').classList.add('active');
-            
-            if (game === 'condogame') {
-                document.getElementById('gameTitle').textContent = 'Condo Game - Pilih Server';
-                document.getElementById('headerSubtitle').textContent = 'Condo Game';
-            } else {
-                document.getElementById('gameTitle').textContent = 'Sword Game - Pilih Server';
-                document.getElementById('headerSubtitle').textContent = 'Sword Game';
-            }
-            
+            document.getElementById('headerSubtitle').textContent = 'Sword Game';
             generateServers();
         }
 
@@ -398,24 +384,25 @@
             servers = [];
         }
 
-        function getRandomColor() {
-            return avatarColors[Math.floor(Math.random() * avatarColors.length)];
-        }
-
         function getRandomPlayerName() {
             const name = playerNames[Math.floor(Math.random() * playerNames.length)];
             const number = Math.floor(Math.random() * 10000);
             return name + number;
         }
 
+        function getRandomRobloxUserId() {
+            // Gunakan user IDs yang sudah ada
+            return robloxUserIds[Math.floor(Math.random() * robloxUserIds.length)];
+        }
+
         function generateRandomPlayers(count) {
             const players = [];
             for (let i = 0; i < count; i++) {
-                const initials = Math.random().toString(36).substring(2, 4).toUpperCase();
+                const userId = getRandomRobloxUserId();
                 players.push({
                     name: getRandomPlayerName(),
-                    color: getRandomColor(),
-                    initials: initials || 'PL'
+                    userId: userId,
+                    avatarUrl: `https://www.roblox.com/headshot-thumbnail/image?userId=${userId}&width=420&height=420&format=png`
                 });
             }
             return players;
@@ -461,9 +448,11 @@
                 server.players.forEach(player => {
                     playersHTML += `
                         <div class="player-avatar">
-                            <div class="avatar-circle" style="background: ${player.color};" title="${player.name}">
-                                ${player.initials}
-                            </div>
+                            <img class="avatar-image" 
+                                 src="${player.avatarUrl}" 
+                                 alt="${player.name}" 
+                                 title="${player.name}"
+                                 onerror="this.style.background='linear-gradient(135deg, #667eea, #764ba2)'">
                             <div class="player-name">${player.name}</div>
                         </div>
                     `;
