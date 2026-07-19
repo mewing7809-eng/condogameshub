@@ -205,6 +205,7 @@
             overflow: hidden;
             color: white;
             font-weight: bold;
+            border: 2px solid white;
         }
 
         .player-avatar:hover {
@@ -216,6 +217,17 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+        }
+
+        .player-name {
+            font-size: 0.7em;
+            margin-top: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            text-align: center;
+            color: #333;
+            font-weight: 600;
         }
 
         .server-button {
@@ -328,12 +340,17 @@
         const MAX_PLAYERS = 50;
         const ROBLOX_JOIN_LINK = "https://www.roblox.et/games/15884350761/UPDATE-Bloody-Ragdoll-Engine-Remastered?privateServerLinkCode=01398199490362022720669062623329";
         
-        // Random Roblox Avatar IDs
-        const robloxUserIds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 155, 253, 382, 500, 735, 1000];
+        // Array warna random untuk avatar
+        const avatarColors = [
+            '#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8',
+            '#F7DC6F', '#BB8FCE', '#85C1E2', '#F8B88B', '#A9DFBF',
+            '#F1948A', '#AED6F1', '#F8B88B', '#D5A6BD', '#85C1E2'
+        ];
 
         const playerNames = [
             'Player', 'Gamer', 'Hero', 'Legend', 'Master', 'Pro', 'Elite', 'Shadow',
-            'Phoenix', 'Dragon', 'Warrior', 'Knight', 'Ranger', 'Wizard', 'Ninja', 'Viking'
+            'Phoenix', 'Dragon', 'Warrior', 'Knight', 'Ranger', 'Wizard', 'Ninja', 'Viking',
+            'Storm', 'Blaze', 'Frost', 'Sonic', 'Ghost', 'Titan', 'Arrow', 'Mystic'
         ];
 
         let servers = [];
@@ -350,9 +367,8 @@
             servers = [];
         }
 
-        function getRandomAvatar() {
-            const userId = robloxUserIds[Math.floor(Math.random() * robloxUserIds.length)];
-            return `https://www.roblox.com/headshot-thumbnail/image?userId=${userId}&width=420&height=420&format=png`;
+        function getRandomColor() {
+            return avatarColors[Math.floor(Math.random() * avatarColors.length)];
         }
 
         function getRandomPlayerName() {
@@ -364,9 +380,11 @@
         function generateRandomPlayers(count) {
             const players = [];
             for (let i = 0; i < count; i++) {
+                const initials = Math.random().toString(36).substring(2, 4).toUpperCase();
                 players.push({
                     name: getRandomPlayerName(),
-                    avatar: getRandomAvatar()
+                    color: getRandomColor(),
+                    initials: initials || 'PL'
                 });
             }
             return players;
@@ -411,8 +429,11 @@
                 let playersHTML = '';
                 server.players.forEach(player => {
                     playersHTML += `
-                        <div class="player-avatar" title="${player.name}">
-                            <img src="${player.avatar}" alt="${player.name}" onerror="this.style.display='none'">
+                        <div style="text-align: center;">
+                            <div class="player-avatar" style="background: ${player.color}; margin-bottom: 4px;" title="${player.name}">
+                                ${player.initials}
+                            </div>
+                            <div class="player-name">${player.name}</div>
                         </div>
                     `;
                 });
