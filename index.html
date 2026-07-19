@@ -23,32 +23,60 @@
 
         .container {
             width: 100%;
-            max-width: 1200px;
+            max-width: 1400px;
         }
 
         .header {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 60px;
             color: white;
+            animation: slideDown 0.6s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .header h1 {
-            font-size: 3em;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            font-size: 3.5em;
+            margin-bottom: 15px;
+            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
+            font-weight: 800;
+            letter-spacing: 2px;
         }
 
         .header p {
-            font-size: 1.2em;
-            opacity: 0.9;
+            font-size: 1.3em;
+            opacity: 0.95;
+            font-weight: 300;
+            letter-spacing: 1px;
         }
 
         .game-selection {
             display: flex;
-            gap: 20px;
+            gap: 30px;
             justify-content: center;
             flex-wrap: wrap;
             margin-bottom: 50px;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .game-selection.hidden {
@@ -57,41 +85,62 @@
 
         .game-card {
             background: white;
-            border-radius: 15px;
-            padding: 30px;
-            width: 280px;
+            border-radius: 20px;
+            padding: 40px 30px;
+            width: 300px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            border: 3px solid transparent;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+            border: 4px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .game-card:hover::before {
+            left: 100%;
         }
 
         .game-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: 0 25px 60px rgba(102, 126, 234, 0.4);
             border-color: #667eea;
-        }
-
-        .game-card.active {
-            border-color: #667eea;
-            background: linear-gradient(135deg, #667eea15, #764ba215);
         }
 
         .game-icon {
-            font-size: 4em;
-            margin-bottom: 15px;
+            font-size: 5em;
+            margin-bottom: 20px;
+            display: inline-block;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
         .game-card h2 {
-            font-size: 1.8em;
+            font-size: 2em;
             color: #333;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            font-weight: 700;
         }
 
         .game-card p {
             color: #666;
-            font-size: 0.95em;
+            font-size: 1em;
+            line-height: 1.6;
         }
 
         .servers-container {
@@ -116,202 +165,261 @@
 
         .back-button {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
         }
 
         .back-btn {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.25);
             color: white;
             border: 2px solid white;
-            padding: 10px 30px;
-            border-radius: 8px;
+            padding: 12px 35px;
+            border-radius: 50px;
             cursor: pointer;
-            font-size: 1em;
+            font-size: 1.05em;
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
+            font-weight: 600;
+            letter-spacing: 0.5px;
         }
 
         .back-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.35);
+            transform: scale(1.08);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
         }
 
         .servers-title {
             color: white;
             text-align: center;
-            font-size: 2em;
-            margin-bottom: 40px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            font-size: 2.5em;
+            margin-bottom: 50px;
+            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
+            font-weight: 700;
+            letter-spacing: 1px;
         }
 
         .servers-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-bottom: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 35px;
+            margin-bottom: 40px;
         }
 
         .server-card {
             background: white;
-            border-radius: 15px;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s ease;
+            border: 3px solid transparent;
+            animation: slideInCard 0.5s ease forwards;
+        }
+
+        @keyframes slideInCard {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .server-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            transform: translateY(-12px);
+            box-shadow: 0 25px 60px rgba(102, 126, 234, 0.3);
+            border-color: #667eea;
         }
 
         .server-header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 20px;
+            padding: 30px 20px;
             text-align: center;
         }
 
         .server-name {
-            font-size: 1.5em;
-            font-weight: bold;
-            margin-bottom: 8px;
+            font-size: 1.8em;
+            font-weight: 800;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
         }
 
         .server-status {
-            font-size: 0.9em;
-            opacity: 0.9;
+            font-size: 1em;
+            opacity: 0.95;
+            font-weight: 500;
+            letter-spacing: 0.5px;
         }
 
         .server-players {
-            padding: 25px;
+            padding: 35px;
         }
 
         .players-grid {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 12px;
-            margin-bottom: 20px;
-            min-height: 200px;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: 18px;
+            margin-bottom: 25px;
+            min-height: 150px;
         }
 
         .player-avatar {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            animation: scaleIn 0.3s ease;
         }
 
-        .avatar-image {
-            width: 60px;
-            height: 60px;
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .avatar-circle {
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
             cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            border: 3px solid white;
-            object-fit: cover;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            border: 4px solid white;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.5em;
+            color: white;
             background: linear-gradient(135deg, #667eea, #764ba2);
-            display: block;
         }
 
-        .avatar-image:hover {
-            transform: scale(1.15);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+        .avatar-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .avatar-circle:hover {
+            transform: scale(1.2) rotateZ(5deg);
+            box-shadow: 0 12px 30px rgba(102, 126, 234, 0.4);
         }
 
         .player-name {
-            font-size: 0.7em;
+            font-size: 0.8em;
             color: #333;
             font-weight: 700;
             text-align: center;
             word-break: break-word;
-            max-width: 65px;
-            line-height: 1.2;
+            max-width: 75px;
+            line-height: 1.3;
+            letter-spacing: 0.5px;
         }
 
         .server-button {
             width: 100%;
-            padding: 12px;
+            padding: 15px;
             border: none;
-            border-radius: 8px;
-            font-size: 1em;
-            font-weight: bold;
+            border-radius: 12px;
+            font-size: 1.05em;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
             text-decoration: none;
             display: inline-block;
             text-align: center;
-            margin-top: 10px;
+            letter-spacing: 1px;
+            margin-top: 15px;
         }
 
         .join-button {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
         }
 
         .join-button:hover {
-            transform: scale(1.02);
-            box-shadow: 0 8px 16px rgba(102, 126, 234, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(102, 126, 234, 0.5);
         }
 
         .join-button:active {
-            transform: scale(0.98);
+            transform: translateY(-1px);
         }
 
         .full-button {
-            background: #ccc;
-            color: #666;
+            background: linear-gradient(135deg, #ddd 0%, #ccc 100%);
+            color: #999;
             cursor: not-allowed;
             font-style: italic;
         }
 
         .full-button:hover {
             transform: none;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
         }
 
         .player-count {
             text-align: center;
-            color: #666;
-            font-size: 0.9em;
-            margin-top: 10px;
-            font-weight: 500;
+            color: #667eea;
+            font-size: 1em;
+            margin-top: 15px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
         }
 
         .refresh-button {
             display: block;
-            margin: 30px auto;
-            background: rgba(255, 255, 255, 0.2);
+            margin: 40px auto;
+            background: rgba(255, 255, 255, 0.25);
             color: white;
             border: 2px solid white;
-            padding: 12px 40px;
-            border-radius: 8px;
+            padding: 15px 50px;
+            border-radius: 50px;
             cursor: pointer;
-            font-size: 1em;
+            font-size: 1.1em;
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
+            font-weight: 700;
+            letter-spacing: 1px;
         }
 
         .refresh-button:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.35);
+            transform: scale(1.08) rotate(10deg);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         }
 
         @media (max-width: 768px) {
             .header h1 {
-                font-size: 2em;
+                font-size: 2.2em;
             }
 
             .servers-grid {
                 grid-template-columns: 1fr;
+                gap: 25px;
             }
 
             .game-card {
                 width: 100%;
-                max-width: 280px;
             }
 
             .players-grid {
                 grid-template-columns: repeat(4, 1fr);
+            }
+
+            .avatar-circle {
+                width: 60px;
+                height: 60px;
+                font-size: 1.2em;
             }
         }
     </style>
@@ -320,7 +428,7 @@
     <div class="container">
         <!-- Header -->
         <div class="header">
-            <h1>🎮 Condo Games Hub</h1>
+            <h1>🎮 CONDO GAMES HUB</h1>
             <p id="headerSubtitle">Pilih Game untuk Dimainkan</p>
         </div>
 
@@ -329,19 +437,19 @@
             <div class="game-card" onclick="selectGame('condogame')">
                 <div class="game-icon">🏠</div>
                 <h2>Condo Game</h2>
-                <p>Bermain di kondominial dengan teman</p>
+                <p>Bermain di kondominial yang mewah dan nikmati petualangan seru dengan teman-temanmu</p>
             </div>
         </div>
 
         <!-- Servers Screen -->
         <div id="serversScreen" class="servers-container">
             <div class="back-button">
-                <button class="back-btn" onclick="goBack()">← Kembali</button>
+                <button class="back-btn" onclick="goBack()">← KEMBALI</button>
             </div>
-            <div class="servers-title" id="gameTitle">Sword Game - Pilih Server</div>
+            <div class="servers-title" id="gameTitle">⚔️ SWORD GAME - PILIH SERVER</div>
             <div class="servers-grid" id="serversGrid"></div>
             <div style="text-align: center;">
-                <button class="refresh-button" onclick="generateServers()">🔄 Refresh Server</button>
+                <button class="refresh-button" onclick="generateServers()">🔄 REFRESH SERVER</button>
             </div>
         </div>
     </div>
@@ -351,19 +459,18 @@
         const ROBLOX_JOIN_LINK = "https://www.roblox.et/games/15884350761/UPDATE-Bloody-Ragdoll-Engine-Remastered?privateServerLinkCode=01398199490362022720669062623329";
         
         const playerNames = [
-            'Player', 'Gamer', 'Hero', 'Legend', 'Master', 'Pro', 'Elite', 'Shadow',
-            'Phoenix', 'Dragon', 'Warrior', 'Knight', 'Ranger', 'Wizard', 'Ninja', 'Viking',
-            'Storm', 'Blaze', 'Frost', 'Sonic', 'Ghost', 'Titan', 'Arrow', 'Mystic',
-            'Hunter', 'Slayer', 'Demon', 'Angel', 'Fire', 'Ice', 'Thunder', 'Wind',
-            'Apex', 'Beast', 'Champion', 'Dynamo', 'Eclipse', 'Fury', 'Glacier', 'Havoc'
+            'Shadow', 'Phoenix', 'Dragon', 'Warrior', 'Knight', 'Ranger', 'Wizard', 'Ninja',
+            'Viking', 'Storm', 'Blaze', 'Frost', 'Sonic', 'Ghost', 'Titan', 'Arrow',
+            'Mystic', 'Hunter', 'Slayer', 'Demon', 'Angel', 'Fire', 'Ice', 'Thunder',
+            'Wind', 'Apex', 'Beast', 'Champion', 'Dynamo', 'Eclipse', 'Fury', 'Glacier'
         ];
 
-        // Popular Roblox user IDs yang pasti punya avatar
-        const robloxUserIds = [
-            1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
-            155, 253, 382, 500, 735, 1000, 1234, 5678,
-            9999, 12345, 54321, 99999, 123456, 555555,
-            777777, 888888, 111111, 222222, 333333, 444444
+        // Avatar warna random yang cantik
+        const avatarColors = [
+            '#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8',
+            '#F7DC6F', '#BB8FCE', '#85C1E2', '#F8B88B', '#A9DFBF',
+            '#F1948A', '#AED6F1', '#D5A6BD', '#F39C12', '#9B59B6',
+            '#3498DB', '#E74C3C', '#1ABC9C', '#27AE60', '#E67E22'
         ];
 
         let servers = [];
@@ -386,23 +493,26 @@
 
         function getRandomPlayerName() {
             const name = playerNames[Math.floor(Math.random() * playerNames.length)];
-            const number = Math.floor(Math.random() * 10000);
+            const number = Math.floor(Math.random() * 9999);
             return name + number;
         }
 
-        function getRandomRobloxUserId() {
-            // Gunakan user IDs yang sudah ada
-            return robloxUserIds[Math.floor(Math.random() * robloxUserIds.length)];
+        function getRandomColor() {
+            return avatarColors[Math.floor(Math.random() * avatarColors.length)];
+        }
+
+        function getInitials(name) {
+            return name.substring(0, 2).toUpperCase();
         }
 
         function generateRandomPlayers(count) {
             const players = [];
             for (let i = 0; i < count; i++) {
-                const userId = getRandomRobloxUserId();
+                const name = getRandomPlayerName();
                 players.push({
-                    name: getRandomPlayerName(),
-                    userId: userId,
-                    avatarUrl: `https://www.roblox.com/headshot-thumbnail/image?userId=${userId}&width=420&height=420&format=png`
+                    name: name,
+                    color: getRandomColor(),
+                    initials: getInitials(name)
                 });
             }
             return players;
@@ -411,7 +521,7 @@
         function generateServers() {
             servers = [];
             
-            // Server 1 - Acak jumlah player
+            // Server 1
             const server1PlayerCount = Math.floor(Math.random() * (MAX_PLAYERS + 1));
             servers.push({
                 name: 'Server 1',
@@ -420,7 +530,7 @@
                 isFull: server1PlayerCount >= MAX_PLAYERS
             });
 
-            // Server 2 - Acak jumlah player
+            // Server 2
             const server2PlayerCount = Math.floor(Math.random() * (MAX_PLAYERS + 1));
             servers.push({
                 name: 'Server 2',
@@ -439,28 +549,27 @@
             servers.forEach((server, index) => {
                 const serverCard = document.createElement('div');
                 serverCard.className = 'server-card';
+                serverCard.style.animationDelay = `${index * 0.1}s`;
 
                 const statusText = server.isFull 
                     ? `${server.players.length}/${server.maxPlayers} (PENUH)` 
-                    : `${server.players.length}/${server.maxPlayers}`;
+                    : `${server.players.length}/${server.maxPlayers} TERSEDIA`;
 
                 let playersHTML = '';
                 server.players.forEach(player => {
                     playersHTML += `
                         <div class="player-avatar">
-                            <img class="avatar-image" 
-                                 src="${player.avatarUrl}" 
-                                 alt="${player.name}" 
-                                 title="${player.name}"
-                                 onerror="this.style.background='linear-gradient(135deg, #667eea, #764ba2)'">
+                            <div class="avatar-circle" style="background: ${player.color};" title="${player.name}">
+                                ${player.initials}
+                            </div>
                             <div class="player-name">${player.name}</div>
                         </div>
                     `;
                 });
 
                 const buttonHTML = server.isFull
-                    ? '<button class="server-button full-button">SERVER PENUH</button>'
-                    : `<a href="${ROBLOX_JOIN_LINK}" target="_blank" class="server-button join-button">JOIN SERVER</a>`;
+                    ? '<button class="server-button full-button">⛔ SERVER PENUH</button>'
+                    : `<a href="${ROBLOX_JOIN_LINK}" target="_blank" class="server-button join-button">✨ JOIN SERVER SEKARANG</a>`;
 
                 serverCard.innerHTML = `
                     <div class="server-header">
@@ -469,9 +578,9 @@
                     </div>
                     <div class="server-players">
                         <div class="players-grid">
-                            ${playersHTML || '<p style="color: #999; grid-column: 1/-1; margin: 0;">Belum ada player</p>'}
+                            ${playersHTML || '<p style="color: #999; grid-column: 1/-1; margin: 0; font-weight: 600;">Belum ada pemain</p>'}
                         </div>
-                        <div class="player-count">Players: ${server.players.length}/${server.maxPlayers}</div>
+                        <div class="player-count">👥 ${server.players.length} / ${server.maxPlayers} Pemain</div>
                         ${buttonHTML}
                     </div>
                 `;
@@ -482,7 +591,7 @@
 
         // Initial setup
         window.addEventListener('load', () => {
-            console.log('Page siap - pilih game untuk mulai');
+            console.log('🎮 Condo Games Hub Ready!');
         });
     </script>
 </body>
