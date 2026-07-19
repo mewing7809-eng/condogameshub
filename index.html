@@ -19,6 +19,7 @@
             align-items: center;
             justify-content: center;
             padding: 20px;
+            overflow-x: hidden;
         }
 
         .container {
@@ -28,7 +29,7 @@
 
         .header {
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 80px;
             color: white;
             animation: slideDown 0.6s ease;
         }
@@ -36,7 +37,7 @@
         @keyframes slideDown {
             from {
                 opacity: 0;
-                transform: translateY(-30px);
+                transform: translateY(-50px);
             }
             to {
                 opacity: 1;
@@ -45,33 +46,37 @@
         }
 
         .header h1 {
-            font-size: 3.5em;
-            margin-bottom: 15px;
-            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
-            font-weight: 800;
-            letter-spacing: 2px;
+            font-size: 4em;
+            margin-bottom: 20px;
+            text-shadow: 4px 4px 12px rgba(0, 0, 0, 0.4);
+            font-weight: 900;
+            letter-spacing: 3px;
+            background: linear-gradient(45deg, #fff, #e0e0e0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .header p {
-            font-size: 1.3em;
-            opacity: 0.95;
+            font-size: 1.4em;
+            opacity: 0.9;
             font-weight: 300;
             letter-spacing: 1px;
         }
 
         .game-selection {
             display: flex;
-            gap: 30px;
+            gap: 40px;
             justify-content: center;
             flex-wrap: wrap;
             margin-bottom: 50px;
-            animation: fadeInUp 0.6s ease;
+            animation: fadeInUp 0.8s ease;
         }
 
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(50px);
             }
             to {
                 opacity: 1;
@@ -85,13 +90,13 @@
 
         .game-card {
             background: white;
-            border-radius: 20px;
-            padding: 40px 30px;
-            width: 300px;
+            border-radius: 25px;
+            padding: 50px 35px;
+            width: 320px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
             border: 4px solid transparent;
             position: relative;
             overflow: hidden;
@@ -104,8 +109,8 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.5s;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.6s;
         }
 
         .game-card:hover::before {
@@ -113,39 +118,42 @@
         }
 
         .game-card:hover {
-            transform: translateY(-15px) scale(1.05);
-            box-shadow: 0 25px 60px rgba(102, 126, 234, 0.4);
+            transform: translateY(-20px) scale(1.08);
+            box-shadow: 0 30px 80px rgba(102, 126, 234, 0.5);
             border-color: #667eea;
         }
 
         .game-icon {
-            font-size: 5em;
-            margin-bottom: 20px;
+            font-size: 6em;
+            margin-bottom: 25px;
             display: inline-block;
-            animation: bounce 2s infinite;
+            animation: bounce 2.5s infinite;
+            filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.2));
         }
 
         @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-15px) scale(1.05); }
         }
 
         .game-card h2 {
-            font-size: 2em;
-            color: #333;
-            margin-bottom: 12px;
-            font-weight: 700;
+            font-size: 2.2em;
+            color: #667eea;
+            margin-bottom: 15px;
+            font-weight: 800;
+            letter-spacing: 1px;
         }
 
         .game-card p {
-            color: #666;
-            font-size: 1em;
-            line-height: 1.6;
+            color: #555;
+            font-size: 1.05em;
+            line-height: 1.8;
+            font-weight: 400;
         }
 
         .servers-container {
             display: none;
-            animation: fadeIn 0.3s ease;
+            animation: fadeIn 0.4s ease;
         }
 
         .servers-container.active {
@@ -153,69 +161,6 @@
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .back-button {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .back-btn {
-            background: rgba(255, 255, 255, 0.25);
-            color: white;
-            border: 2px solid white;
-            padding: 12px 35px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-size: 1.05em;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            font-weight: 600;
-            letter-spacing: 0.5px;
-        }
-
-        .back-btn:hover {
-            background: rgba(255, 255, 255, 0.35);
-            transform: scale(1.08);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .servers-title {
-            color: white;
-            text-align: center;
-            font-size: 2.5em;
-            margin-bottom: 50px;
-            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
-            font-weight: 700;
-            letter-spacing: 1px;
-        }
-
-        .servers-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 35px;
-            margin-bottom: 40px;
-        }
-
-        .server-card {
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
-            transition: all 0.4s ease;
-            border: 3px solid transparent;
-            animation: slideInCard 0.5s ease forwards;
-        }
-
-        @keyframes slideInCard {
             from {
                 opacity: 0;
                 transform: translateY(30px);
@@ -226,124 +171,16 @@
             }
         }
 
-        .server-card:hover {
-            transform: translateY(-12px);
-            box-shadow: 0 25px 60px rgba(102, 126, 234, 0.3);
-            border-color: #667eea;
-        }
-
-        .server-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 30px 20px;
+        .back-button {
             text-align: center;
+            margin-bottom: 50px;
         }
 
-        .server-name {
-            font-size: 1.8em;
-            font-weight: 800;
-            margin-bottom: 10px;
-            letter-spacing: 1px;
-        }
-
-        .server-status {
-            font-size: 1em;
-            opacity: 0.95;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-        }
-
-        .server-players {
-            padding: 35px;
-        }
-
-        .player-count-display {
-            text-align: center;
-            font-size: 2.5em;
-            color: #667eea;
-            font-weight: 800;
-            margin-bottom: 25px;
-            letter-spacing: 1px;
-        }
-
-        .online-indicators {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 25px;
-            flex-wrap: wrap;
-            min-height: 40px;
-        }
-
-        .online-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #4ECDC4;
-            animation: pulse 2s infinite;
-            box-shadow: 0 0 8px rgba(78, 205, 196, 0.6);
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0.6;
-            }
-        }
-
-        .server-button {
-            width: 100%;
-            padding: 15px;
-            border: none;
-            border-radius: 12px;
-            font-size: 1.05em;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-            text-align: center;
-            letter-spacing: 1px;
-            margin-top: 15px;
-        }
-
-        .join-button {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
-        }
-
-        .join-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 30px rgba(102, 126, 234, 0.5);
-        }
-
-        .join-button:active {
-            transform: translateY(-1px);
-        }
-
-        .full-button {
-            background: linear-gradient(135deg, #ddd 0%, #ccc 100%);
-            color: #999;
-            cursor: not-allowed;
-            font-style: italic;
-        }
-
-        .full-button:hover {
-            transform: none;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .refresh-button {
-            display: block;
-            margin: 40px auto;
-            background: rgba(255, 255, 255, 0.25);
+        .back-btn {
+            background: rgba(255, 255, 255, 0.2);
             color: white;
             border: 2px solid white;
-            padding: 15px 50px;
+            padding: 14px 40px;
             border-radius: 50px;
             cursor: pointer;
             font-size: 1.1em;
@@ -353,28 +190,216 @@
             letter-spacing: 1px;
         }
 
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.35);
+            transform: scale(1.1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+        }
+
+        .servers-title {
+            color: white;
+            text-align: center;
+            font-size: 3em;
+            margin-bottom: 60px;
+            text-shadow: 4px 4px 12px rgba(0, 0, 0, 0.4);
+            font-weight: 900;
+            letter-spacing: 2px;
+        }
+
+        .servers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .server-card {
+            background: white;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            transition: all 0.5s ease;
+            border: 3px solid transparent;
+            animation: slideInCard 0.6s ease forwards;
+        }
+
+        @keyframes slideInCard {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .server-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 30px 80px rgba(102, 126, 234, 0.35);
+            border-color: #667eea;
+        }
+
+        .server-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 35px 25px;
+            text-align: center;
+        }
+
+        .server-name {
+            font-size: 2em;
+            font-weight: 900;
+            margin-bottom: 12px;
+            letter-spacing: 2px;
+        }
+
+        .server-status {
+            font-size: 1.1em;
+            opacity: 0.95;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .server-players {
+            padding: 40px;
+        }
+
+        .players-display {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .player-avatars {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .avatar-img {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+
+        .avatar-img:hover {
+            transform: scale(1.15) translateY(-5px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .more-players {
+            font-size: 1.2em;
+            color: #667eea;
+            font-weight: 800;
+            min-width: 80px;
+        }
+
+        .player-count-text {
+            text-align: center;
+            color: #667eea;
+            font-size: 1.3em;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .server-button {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 14px;
+            font-size: 1.1em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            letter-spacing: 1px;
+            margin-top: 20px;
+        }
+
+        .join-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .join-button:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.6);
+        }
+
+        .join-button:active {
+            transform: translateY(-2px);
+        }
+
+        .full-button {
+            background: linear-gradient(135deg, #ddd 0%, #bbb 100%);
+            color: #777;
+            cursor: not-allowed;
+            font-style: italic;
+        }
+
+        .full-button:hover {
+            transform: none;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .refresh-button {
+            display: block;
+            margin: 50px auto;
+            background: rgba(255, 255, 255, 0.25);
+            color: white;
+            border: 2px solid white;
+            padding: 16px 55px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.15em;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
         .refresh-button:hover {
             background: rgba(255, 255, 255, 0.35);
-            transform: scale(1.08) rotate(10deg);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            transform: scale(1.1) rotate(15deg);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
         }
 
         @media (max-width: 768px) {
             .header h1 {
-                font-size: 2.2em;
+                font-size: 2.5em;
             }
 
             .servers-grid {
                 grid-template-columns: 1fr;
-                gap: 25px;
+                gap: 30px;
             }
 
             .game-card {
                 width: 100%;
             }
 
-            .player-count-display {
+            .servers-title {
                 font-size: 2em;
+            }
+
+            .server-name {
+                font-size: 1.5em;
+            }
+
+            .avatar-img {
+                width: 55px;
+                height: 55px;
             }
         }
     </style>
@@ -399,9 +424,9 @@
         <!-- Servers Screen -->
         <div id="serversScreen" class="servers-container">
             <div class="back-button">
-                <button class="back-btn" onclick="goBack()">← KEMBALI</button>
+                <button class="back-btn" onclick="goBack()">← KEMBALI KE MENU</button>
             </div>
-            <div class="servers-title" id="gameTitle">⚔️ SWORD GAME - PILIH SERVER</div>
+            <div class="servers-title" id="gameTitle">⚔️ SWORD GAME</div>
             <div class="servers-grid" id="serversGrid"></div>
             <div style="text-align: center;">
                 <button class="refresh-button" onclick="generateServers()">🔄 REFRESH SERVER</button>
@@ -412,6 +437,18 @@
     <script>
         const MAX_PLAYERS = 50;
         const ROBLOX_JOIN_LINK = "https://www.roblox.et/games/15884350761/UPDATE-Bloody-Ragdoll-Engine-Remastered?privateServerLinkCode=01398199490362022720669062623329";
+        
+        const robloxUserIds = [
+            1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
+            16, 17, 18, 19, 20, 155, 253, 382, 500, 735, 1000,
+            1234, 5678, 9999, 12345, 54321, 99999, 123456, 555555,
+            777777, 888888, 111111, 222222, 333333, 444444, 666666
+        ];
+
+        const playerNames = [
+            'Shadow', 'Phoenix', 'Dragon', 'Warrior', 'Knight', 'Ranger', 'Wizard', 'Ninja',
+            'Viking', 'Storm', 'Blaze', 'Frost', 'Sonic', 'Ghost', 'Titan', 'Arrow'
+        ];
 
         let servers = [];
         let currentGame = '';
@@ -431,6 +468,30 @@
             servers = [];
         }
 
+        function getRandomRobloxUserId() {
+            return robloxUserIds[Math.floor(Math.random() * robloxUserIds.length)];
+        }
+
+        function getRandomPlayerName() {
+            const name = playerNames[Math.floor(Math.random() * playerNames.length)];
+            const number = Math.floor(Math.random() * 9999);
+            return name + number;
+        }
+
+        function generateRandomPlayers(count) {
+            const players = [];
+            const displayCount = Math.min(count, 4);
+            for (let i = 0; i < displayCount; i++) {
+                const userId = getRandomRobloxUserId();
+                players.push({
+                    name: getRandomPlayerName(),
+                    userId: userId,
+                    avatarUrl: `https://www.roblox.com/headshot-thumbnail/image?userId=${userId}&width=200&height=200&format=webp`
+                });
+            }
+            return players;
+        }
+
         function generateServers() {
             servers = [];
             
@@ -438,7 +499,8 @@
             const server1PlayerCount = Math.floor(Math.random() * (MAX_PLAYERS + 1));
             servers.push({
                 name: 'Server 1',
-                playerCount: server1PlayerCount,
+                totalPlayers: server1PlayerCount,
+                displayPlayers: generateRandomPlayers(server1PlayerCount),
                 maxPlayers: MAX_PLAYERS,
                 isFull: server1PlayerCount >= MAX_PLAYERS
             });
@@ -447,7 +509,8 @@
             const server2PlayerCount = Math.floor(Math.random() * (MAX_PLAYERS + 1));
             servers.push({
                 name: 'Server 2',
-                playerCount: server2PlayerCount,
+                totalPlayers: server2PlayerCount,
+                displayPlayers: generateRandomPlayers(server2PlayerCount),
                 maxPlayers: MAX_PLAYERS,
                 isFull: server2PlayerCount >= MAX_PLAYERS
             });
@@ -462,17 +525,21 @@
             servers.forEach((server, index) => {
                 const serverCard = document.createElement('div');
                 serverCard.className = 'server-card';
-                serverCard.style.animationDelay = `${index * 0.1}s`;
+                serverCard.style.animationDelay = `${index * 0.15}s`;
 
                 const statusText = server.isFull 
-                    ? `${server.playerCount}/${server.maxPlayers} (PENUH)` 
-                    : `${server.playerCount}/${server.maxPlayers} TERSEDIA`;
+                    ? `${server.totalPlayers}/${server.maxPlayers} (PENUH)` 
+                    : `${server.totalPlayers}/${server.maxPlayers}`;
 
-                // Generate online indicators
-                let onlineIndicatorsHTML = '';
-                for (let i = 0; i < server.playerCount; i++) {
-                    onlineIndicatorsHTML += '<div class="online-dot"></div>';
-                }
+                // Generate avatar images
+                let avatarsHTML = '';
+                server.displayPlayers.forEach(player => {
+                    avatarsHTML += `<img class="avatar-img" src="${player.avatarUrl}" alt="${player.name}" title="${player.name}" onerror="this.style.display='none'">`;
+                });
+
+                // Calculate remaining players
+                const remainingPlayers = server.totalPlayers - Math.min(server.totalPlayers, 4);
+                const morePlayersText = remainingPlayers > 0 ? `+${remainingPlayers} online` : '';
 
                 const buttonHTML = server.isFull
                     ? '<button class="server-button full-button">⛔ SERVER PENUH</button>'
@@ -484,9 +551,12 @@
                         <div class="server-status">${statusText}</div>
                     </div>
                     <div class="server-players">
-                        <div class="player-count-display">${server.playerCount}/${server.maxPlayers}</div>
-                        <div class="online-indicators">
-                            ${onlineIndicatorsHTML || '<p style="color: #999; margin: 0;">Belum ada pemain</p>'}
+                        <div class="player-count-text">👥 ${server.totalPlayers} / ${server.maxPlayers} Pemain</div>
+                        <div class="players-display">
+                            <div class="player-avatars">
+                                ${avatarsHTML}
+                            </div>
+                            ${morePlayersText ? `<div class="more-players">${morePlayersText}</div>` : ''}
                         </div>
                         ${buttonHTML}
                     </div>
